@@ -58,6 +58,8 @@ require(['head', 'jquery', 'marked', 'custom/structure.builder', 'custom/issue.f
                     history: true,
                     center: true,
                     rollingLinks: false,
+                    width: 1024,
+                    height: 768,
 
                     theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
                     transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none

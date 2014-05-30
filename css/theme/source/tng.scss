@@ -61,6 +61,16 @@
   url('../../lib/font/Lato-BoldItalic.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'News Cycle';
+  font-style: normal;
+  font-weight: 400;
+  src: local('News Cycle Regular'),
+  local('NewsCycle-Regular'),
+  url('../../lib/font/NewsCycle-Regular.woff') format('woff'),
+  url('../../lib/font/NewsCycle-Regular.ttf') format('truetype');
+}
+
 // original url import, now saved locally (see above)
 // @import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic);
 
@@ -82,7 +92,7 @@ $headingFont: 'News Cycle', Impact, sans-serif;
 $headingColor: #000;
 $headingLineHeight: 0.9em;
 $headingLetterSpacing: 0.02em;
-$headingTextTransform: uppercase;
+$headingTextTransform: none;
 $headingTextShadow: none;
 $heading1TextShadow: 0px 0px 6px rgba(0, 0, 0, 0.2);
 

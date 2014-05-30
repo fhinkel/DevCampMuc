@@ -28,6 +28,12 @@
   font-style: italic;
   font-weight: 700;
   src: local("Lato Bold Italic"), local("Lato-BoldItalic"), url("../../lib/font/Lato-BoldItalic.woff") format("woff"), url("../../lib/font/Lato-BoldItalic.ttf") format("truetype"); }
+@font-face {
+  font-family: 'News Cycle';
+  font-style: normal;
+  font-weight: 400;
+  src: local('News Cycle Regular'), local('NewsCycle-Regular'), url("../../lib/font/NewsCycle-Regular.woff") format('woff');
+}
 /*********************************************
  * GLOBAL STYLES
  *********************************************/
@@ -61,7 +67,7 @@ body {
   font-family: "News Cycle", Impact, sans-serif;
   line-height: 0.9em;
   letter-spacing: 0.02em;
-  text-transform: uppercase;
+  text-transform: none;
   text-shadow: none; }
 
 .reveal h1 {

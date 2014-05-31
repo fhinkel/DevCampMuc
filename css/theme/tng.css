@@ -159,11 +159,21 @@ body {
 
 .reveal section img {
   border: none; }
-
 .reveal pre code {
   font-family: Droid Sans Mono, monospace;
   max-height: 700px;
   box-shadow: 0 0 10px black; }
+.reveal ul {
+  list-style-type: square; }
+.reveal > .slides section .title,
+.reveal > .slides section .selected-title {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 5px; }
+.reveal > .slides section .title {
+  background-color: #e3e3e3; }
+.reveal > .slides section .selected-title {
+  background-color: #bbbbbb; }
 
 body.charred .reveal .slides section .fragment.visible {
   opacity: 0.3; }
@@ -173,10 +183,8 @@ body.charred .reveal .slides section .fragment.highlight {
   opacity: 1; }
 body.charred .reveal .slides section .fragment.highlight.focus {
   background-color: yellow;
-  -webkit-border-radius: 4px; }
-
-.reveal ul {
-  list-style-type: square; }
+  -webkit-border-radius: 4px;
+  border-radius: 4px; }
 
 /* apply .not-printed to elements that should not be displayed in hardcopy */
 @media print {
@@ -187,13 +195,3 @@ body.charred .reveal .slides section .fragment.highlight.focus {
     display: none !important; } }
 .i18n {
   display: none; }
-
-.reveal > .slides section .title,
-.reveal > .slides section .selected-title {
-  margin-top: 5px;
-  margin-bottom: 5px;
-  border-radius: 5px; }
-.reveal > .slides section .title {
-  background-color: #e3e3e3; }
-.reveal > .slides section .selected-title {
-  background-color: #bbbbbb; }

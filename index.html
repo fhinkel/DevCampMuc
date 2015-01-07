@@ -3,13 +3,15 @@
 
 <head>
     <meta charset="utf-8">
-    <title>TNG Präsentationen mit Reveal.js</title><!-- FIXME -->
+    <title>Mobile web apps with ‘native app’ features</title><!-- FIXME -->
 
-    <meta name="description" content="Der Inhalt des Vortrags"><!-- FIXME -->
-    <meta name="author" content="Thomas Endres, Michael Pisula, Eric Weikl"><!-- FIXME -->
+    <meta name="description" content="Mobile web apps with ‘native app’ features">
+    <!-- FIXME -->
+    <meta name="author" content="Franziska Hinkelmann">
+    <!-- FIXME -->
 
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
@@ -23,12 +25,12 @@
 
     <!-- If the query includes 'print-pdf', include the PDF print sheet -->
     <script>
-        if( window.location.search.match( /print-pdf/gi ) ) {
-            var link = document.createElement( 'link' );
+        if (window.location.search.match(/print-pdf/gi)) {
+            var link = document.createElement('link');
             link.rel = 'stylesheet';
             link.type = 'text/css';
             link.href = 'css/print/pdf.css';
-            document.getElementsByTagName( 'head' )[0].appendChild( link );
+            document.getElementsByTagName('head')[0].appendChild(link);
         }
     </script>
 
@@ -51,258 +53,327 @@
 
 <!-- Titel-Slide -->
 <section>
-  <h1>Reveal.js</h1><!-- FIXME -->
-  <h3>Bei TNG verwenden</h3><!-- FIXME -->
-  <p style="padding-top:15%">
-    <a href="mailto:thomas.endres@tngtech.com">Thomas Endres</a>,<!-- FIXME -->
-    <a href="mailto:michael.pisula@tngtech.com">Michael Pisula</a>,<!-- FIXME -->
-    <a href="mailto:eric.weikl@tngtech.com">Eric Weikl</a><br><!-- FIXME -->
-    Unterföhring, 2013-10-25<!-- FIXME -->
-  </p>
-  <a href="http://www.tngtech.com"><img class="logo" src="img/tng.svg"></a>
+    <h2>Mobile Web Apps with <p></p><i>Native App</i> Features</h2>
+    <!-- FIXME -->
+    <h4>or</h4>
+
+    <h3> How to Access Orientation and Motion Data</h3>
+
+    <p style="padding-top:15%; text-align:center;">
+        <a href="mailto:franziska.hinkelmann@tngtech.com">Franziska Hinkelmann</a>
+
+    <h3>JavaScript UserGroup Munich</h3>
+    Munich, 2015-01-08
+    </p>
+    <a href="http://www.tngtech.com"><img class="logo" src="img/tng.svg"></a>
 </section>
 
-<!-- Inhalt ab hier, für eigene Präsentationen einfach löschen -->
-<!-- Gibt man data-title="foo" an, wird eine Übersichtseite mit Links hier in die Präsentation eingefügt -->
-<section data-title="Einführung">
-  <section>
-    <h2>Worum geht's?</h2>
-      <ul>
-         <li><a href="http://lab.hakim.se/reveal-js/#/">Reveal.js</a>-Präsentationen bei TNG einheitlicher gestalten</li>
-         <li>Hacks^H^H^H^H^HClevere Tricks verschiedener TNGler konsolidieren</li>
-         <li>Look &amp; Feel von Reveal an TNG angleichen</li>
-        <li>Vorlage für eigene Präsentationen</li>
-      </ul>
-    </section>
-    <section>
-      <h2>Was ist anders als beim normalen Reveal-Download?</h2>
-      <ol>
-        <li>Style: TNG-ähnliche Farben &amp; Schriften, Logo, Animationen</li>
-        <li>Auf <a href="http://requirejs.org">RequireJS</a> umgestellt, um das Reveal.js-Plumbing vom Content zu trennen
-          <div>
-            <span style="color: red">Vorsicht!</span> Ein Webserver ist nötig, z.B.
-            <pre><code class="shell">$ python -m SimpleHTTPServer 9999</code></pre>
-          </div>
-        </li>
-        <li>Zusätzliche Plugins mitgeliefert, die sich bewährt haben:
-          <ul class="no-burn">
-            <li><a href="https://github.com/theone1984/reveal-animate">Animate-Plugin</a>, um aus SVGs animierte Bilder zu erstellen</li>
-            <li><a href="https://github.com/ericweikl/revealjs-charred">Charred Trail Plugin</a>, um den aktuellen Bullet-Point hervorzuheben, oder Source-Code zu highlighten</li>
-            <li><a href="https://github.com/theone1984/reveal-sectiontitle">Section Title Plugin</a> für optionale Übersichtsseiten</li>
-            <li>Erweitertes Notes-Plugin für die SpeakerView-Darstellung</li>
-          </ul>
-        </li>
-      </ol>
-   </section>
-</section>
 
-<section data-title="Beispiele">
-  <section>
-    <h1>Einfache Elemente</h1>
-  </section>
+<section data-title="Motivation">
+    <h2>Native Apps vs. Web Apps</h2>
+    <br>
 
-  <section>
-    <h2>Dies ist eine Überschrift</h2>
-
-    <p style="margin-top: 50px;">Ein Element in der Präsentation</p>
-    <p class="not-printed" style="margin-top: 30px;">Dieses Element wird in der Druckansicht nicht angezeigt</p>
-    <p style="margin-top: 30px;">Dieses Element wird dagegen wieder gedruckt</p>
-  </section>
-
-  <section>
-    <h2>Präsentation in HTML</h2>
-    <h3>Level-3-Überschrift</h3>
-
-    <p>Dieser Text wurde in HTML geschrieben</p>
-    <ul class="no-burn">
-      <li>Listenpunkt 1</li>
-      <li>Listenpunkt 2</li>
-    </ul>
-
-    <pre><code class="sql">-- Code kann auch geschrieben werden
-SELECT *
-FROM Table
-WHERE key='value';</code></pre>
-  </section>
-
-  <section data-markdown>
-    <script type="text/template">
-      ## Präsentation in Markdown
-      ### Level-3-Überschrift
-
-      Dieser Text wurde in Markdown geschrieben
-
-      * Listenpunkt 1
-      * Listenpunkt 2
-
-      ```sql
-      -- Code kann auch geschrieben werden
-      SELECT *
-      FROM Table
-      WHERE key='value';
-      ```
-    </script>
-  </section>
-
-  <section>
-    <h1>Bullet Points</h1>
-    <h4 class="fragment">(bitte sparsam verwenden ;-))</h4>
-  </section>
-
-  <section>
-    <h2>Bullet Points</h2>
-    <h3>Standardverhalten</h3>
-    <ul>
-      <li>Standardmäßig...</li>
-      <li>...werden Punkte nach und nach eingeblendet...</li>
-      <li data-fragment-index="4">...die Reihenfolge ist konfigurierbar</li>
-      <li>...wobei alte Elemente verblassen...</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>Bullet Points</h2>
-    <h3>(statisch)</h3>
-    <ul class="no-burn">
-      <li>Diese Elemente...</li>
-      <li>...sind immer sichtbar</li>
-    </ul>
-    <hr>
-    <ul>
-      <li class="no-burn">Diese Elemente...</li>
-      <li class="no-burn">...verblassen nie</li>
-      <li class="no-burn">egal wie viele kommen</li>
-      <li class="no-burn">Beides wird über CSS-Klassen gesteuert</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>Überblick</h2>
-
-    <p>Alle Sections auf oberster Ebene, <br/>die ein Attribut, "data-title" besitzen:</p>
-    <ul>
-      <li>Erhalten eine Übersichtsseite (wo stehen wir gerade?)</li>
-      <li>Werden mit ihrem Titel auf der Übersichtsseite angezeigt</li>
-    </ul>
-  </section>
-
-  <section>
-    <h1>Source Code Focus</h1>
-  </section>
-
-  <section>
-    <p>Bei Source-Code Beispielen kann man die Stelle, über die man gerade spricht, fokussieren:</p>
-    <pre><code class="java" data-noescape>
-      public ^1^class^^ HelloWorld {
-        public static ^4^void^^ ^2^main^^(^3^String[] args^^) {
-          ^5^System.out.println("Hello World!");^^
-        }
-      }</code></pre>
-        </section>
-
-  <section>
-    <h1>Animationen</h1>
-  </section>
-
-  <section>
-    <h2>Animierte Elemente</h2>
-
-    <div class="animated-html" style="height: 600px;">
-      <animation data-duration="500">
-        <animate data-id="box" data-property="opacity" data-value="1"></animate>
-      </animation>
-      <animation data-duration="500">
-        <animate data-id="box" data-property="top" data-value="400px"></animate>
-        <animate data-id="box" data-property="left" data-value="400px"></animate>
-      </animation>
-
-      <div id="box" style="position: absolute; left: 200px; top: 200px; width: 400px; border: 1px solid black; opacity: 0;">
-        Dieser Text wird sich bewegen
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <h2>Animierte Elemente</h2>
-    <p>SVG</p>
-
-    <div class="svg animated-svg" src="img/test/tng.svg" style="margin-left: 320px; margin-top: 30px; width: 400px; height: 200px;">
-      <initial>
-        <state data-id="TNG" data-property="opacity" data-value="0"></state>
-        <state data-id="technology-consulting" data-property="opacity" data-value="0"></state>
-      </initial>
-      <animation data-duration="500">
-        <animate data-id="TNG" data-property="opacity" data-value="1"></animate>
-        <animate data-id="technology-consulting" data-property="opacity" data-value="1"></animate>
-      </animation>
-      <animation data-duration="500">
-        <animate data-id="TNG" data-property="transform" data-value="translate(-114, 63)"></animate>
-      </animation>
-      <animation data-duration="500">
-        <animate data-id="technology-consulting" data-property="transform" data-value="translate(113, -66)"></animate>
-      </animation>
-    </div>
-  </section>
-</section>
-
-<section data-title="Weitere Features">
-    <section>
-        <h2>SpeakerView</h2>
-
-        <ul style="margin-top: 30px; margin-left: 30px;">
-            <li>Zum Start der Speaker View 's' drücken</li>
-            <li>Oder '?notes' an die URL anhängen <br/> (vor dem Fragment-Identifier '#')</li>
-            <li>In der SpeakerView sind noch nicht angezeigte Fragmente ausgegraut</li>
-            <li>In der Upcoming-Section kann man navigieren, ohne dass <br />die Hauptansicht geändert wird</li>
-            <li>Drückt man dort Enter, springt die Präsentation zur aktuell gewählten Folie</li>
+    <div class="leftImage">
+        <p><b>Native</b></p>
+        <ul class="no-burn">
+            <li>Device specific</li>
+            <li>Offline</li>
+            <li>Push messaging</li>
+            <li>Background syncing</li>
         </ul>
-    </section>
 
-    <section>
-        <h2>PDF erzeugen</h2>
-
-        <ul style="margin-top: 30px;">
-            <li>'?print-pdf' an die URL anhängen <br/> (vor dem Fragment-Identifier '#')</li>
-            <li>Dann kann über den normalen Druckdialog gedruckt werden</li>
-            <li>Druckränder beachten!</li>
+    </div>
+    <div class="rightImage">
+        <p><b>Web</b></p>
+        <ul class="no-burn">
+            <li>Platform independent</li>
+            <li>No AppStore</li>
+            <li>No installation required by user</li>
+            <li>JavaScript <br>
+                (no new programming languages)</li>
         </ul>
-    </section>
-</section>
 
-<section data-title="Getting Started">
-  <section>
-    <h2>Wie erzeuge ich meine Präsentation?</h2>
-    <ol>
-      <li>Bei <a href="mailto:thomas.endres@tngtech.com">Thomas Endres</a> melden,
-          um Leserechte für das <a href="https://git.tngtech.com/reveal-template">Git-Repository</a> zu holen</li>
-      <li>Vorlage auschecken:
-          <pre><code class="bash">$ git clone gitolite@git.tngtech.com:reveal-template.git</code></pre></li>
-      <li>index.html ansehen und anpassen</li>
-      <li><b>Nicht</b> versuchen, in das Repo zurückzupushen ;-) Am besten legt Ihr Euch ein eigenes Repo für Eure Präsentation an.</li>
-    </ol>
-  </section>
+    </div>
 </section>
 
 <section>
-  <h1>Danke-Slide</h1>
-  <h2>Abschluß und Kontaktdaten</h2>
+    <h3>Accelerometer and Gyroscope</h3>
+
+    <div>
+
+        <ul class="no-burn">
+            <li>Shake gesture</li>
+            <li>In games</li>
+            <li>For health and fitness apps</li>
+            <li>Combined with GeoLocation
+                for turn by <br>turn navigation
+            </li>
+        </ul>
+    </div>
+
+    <br>
+    <img style="height: 250px" src="img/labyrinth.png">
+    <img style="height: 250px" src="img/tilt.png">
+    <img style="height: 250px" src="img/pedo.png">
+</section>
+
+
+<section>
+    <p>
+        Easy with <b>DeviceOrientationEvent</b> and <b>DeviceMotionEvent</b>
+        <br>
+        <br>
+
+    </p>
+<pre><code class="javascript">if (window.DeviceOrientationEvent) {
+    window.addEventListener('deviceorientation', function(eventData) {
+    ...
+    });
+    )
+    if ((window.DeviceMotionEvent) {
+    window.addEventListener('devicemotion', function(eventData) {
+    ...
+    });
+    )</code></pre>
+    <p>Supported in current versions of iOS Safari, Chrome, Firefox, IE11</p>
+</section>
+
+<section data-title="DeviceOrientation">
+    <h2>DeviceOrientation</h2>
+
+    <p>The device orientation event returns the rotation data as Euler Angles.</p>
+
+    <div class="rightImage no-burn">
+        <p>
+            Rotation
+        </p>
+        <ul class="no-burn">
+            <li>around z-axis <b>alpha</b></li>
+            <li>around x-axis <b>beta</b></li>
+            <li>around y-axis <b>gamma</b></li>
+        </ul>
+    </div>
+
+    <div class="leftImage">
+        <img src="img/device_axes.png">
+    </div>
+
+</section>
+
+<section>
+    <h2>DeviceOrientation</h2>
+    <h4>Euler Angles</h4>
+
+    <div class="rightImage no-burn">
+        <ul class="no-burn">
+            <li><b>alpha</b> the direction the device is<p></p> facing according to the compass</li>
+            <li><b>beta</b> is the front-to-back tilt</li>
+            <li><b>gamma</b> is the left-to-right tilt</li>
+        </ul>
+    </div>
+
+    <div class="leftImage">
+        <img src="img/rotation.png">
+    </div>
+
+</section>
+
+
+<section>
+<pre style="font-size:0.7em"><code class="javascript" data-noescape>
+window.addEventListener('^1^deviceorientation^^', function(eventData) {
+    var tiltLR = eventData.^2^gamma^^;
+    var tiltFB = eventData.^3^beta^^;
+    var direction = eventData.^4^alpha^^;
+
+    doSomethingWith(tiltLR, tiltFB, direction);
+}, false); </code></pre>
+</section>
+
+<section data-title="DeviceMotion">
+    <h2>Device Motion</h2>
+
+    <p>The DeviceMotionEvent provides the acceleration (in m/s^2)
+        and rotation rate (in d/s) data of the device.
+    </p>
+
+    <div class="leftImage">
+        <img src="img/device_axes.png">
+    </div>
+
+    <div class="rightImage">
+        <p>Acceleration in {x,y,z} direction of phone
+        </p>
+        <ul class="no-burn" style="text-align:left;">
+            <li>
+                Not accelerating: {0, 0, 0}
+            </li>
+            <li>
+                Accelerating forward: {0, 3, 0}
+            </li>
+        </ul>
+        <br>
+        <br>
+        <p></p>
+        <p>Acceleration including gravity
+        </p>
+        <ul class="no-burn" style="text-align:left">
+            <li>
+                Not accelerating : {0, 0, 9.81}
+            </li>
+            <li>
+                Accelerating forward: {0, 3, 9.81}
+            </li>
+        </ul>
+    </div>
+
+</section>
+
+<section>
+    <h3>
+        Phone rotated 90 ° around the x-axis
+    </h3>
+
+    <div class="leftImage">
+        <img src="img/acceleration_axes.png" style="height: 500px">
+    </div>
+
+    <div class="rightImage">
+        <p><br></p>
+
+        <p>Acceleration in {x,y,z} direction of phone
+        </p>
+        <ul class="no-burn" style="text-align:left;">
+            <li>
+                Not accelerating: {0, 0, 0}
+            </li>
+            <li>
+                Accelerating forward: {0, 0, 3}
+            </li>
+        </ul>
+        <br>
+        <br>
+        <p></p>
+        <p>Acceleration including gravity
+        </p>
+        <ul class="no-burn" style="text-align:left">
+            <li>
+                Not accelerating : {0, 9.81, 0}
+            </li>
+            <li>
+                Accelerating forward: {0, 9.81, 3}
+            </li>
+        </ul>
+    </div>
+</section>
+
+
+<section>
+<pre style="font-size:.7em"><code class="javascript" data-noescape="">
+window.addEventListener('^1^devicemotion^^', function(eventData) {
+    var acceleration = eventData.^2^acceleration^^;
+    doSomethingWithAcceleration(acceleration.^3^x^^,
+    acceleration.^4^y^^,
+    acceleration.^5^z^^);
+
+    var accelerationIncludingGravity =
+    eventData.^6^accelerationIncludingGravity^^;
+    var rotation = eventData.^7^rotationRate^^;
+    ...
+}, false); </code></pre>
+</section>
+
+<section data-title="Try it yourself">
+    <h2>Try it: <a href="http://bit.ly/munichJS">bit.ly/munichJS</a></h2>
+<pre><code class="javascript">window.addEventListener('deviceorientation', function (eventData) {
+    document.getElementById("doTiltLR").innerHTML = Math.round(eventData.gamma);
+    document.getElementById("doTiltFB").innerHTML = Math.round(eventData.beta);
+    document.getElementById("doDirection").innerHTML = Math.round(eventData.alpha);
+});
+
+window.addEventListener('devicemotion', function (eventData) {
+    document.getElementById("dmAcceleration").innerHTML = "[" +
+    Math.round(eventData.acceleration.x) + ", " +
+    Math.round(eventData.acceleration.y) + ", " +
+    Math.round(eventData.acceleration.z) + "]";
+
+    document.getElementById("dmAccelerationIncludingGravity").innerHTML = "[" +
+    Math.round(eventData.accelerationIncludingGravity.x) + ", " +
+    Math.round(eventData.accelerationIncludingGravity.y) + ", " +
+    Math.round(eventData.accelerationIncludingGravity.z) + "]";
+
+    document.getElementById("dmRotationRate").innerHTML = "[" +
+    Math.round(eventData.rotationRate.alpha) + ", " +
+    Math.round(eventData.rotationRate.beta) + ", " +
+    Math.round(eventData.rotationRate.gamma) + "]";
+
+    document.getElementById("dmInterval").innerHTML = eventData.interval;
+});</code></pre>
+</section>
+
+<section>
+    <h2>Drawbacks</h2>
+
+    <p>
+    <ul class="no-burn fragment">
+        <li>Differences between devices:<br>
+            <ul class="no-burn fragment">
+                <li class="no-burn fragment">
+                    In Mobile iOS, alpha = 0 is the initial direction, not north, instead
+                    use <i>webkitCompassHeading</i>.
+<pre><code class="javascript">var alpha;
+if(event.webkitCompassHeading) {
+    alpha = event.webkitCompassHeading;
+} </code></pre>
+                </li>
+                <li class="fragment no-burn">
+                    <img src="img/alphaDifferences.png" align="middle">
+                </li>
+                <li class="no-burn fragment">Axis for acceleration in opposite direction on iPhone</li>
+            </ul>
+        <li class="fragment">
+            <p>Native app: motion event update interval can be set
+                (improved battery life).
+        </li>
+    </ul>
+
+</section>
+
+<section>
+    <p>Wrap acceleration code in a class that has device detection</p>
+    <div class="fragment">Because axes matters!<br><br>
+    <br>
+
+    <div class="rotatingImage">
+        <img src="img/duck.png" style="width:400px;">
+    </div>
+    </div>
+</section>
+
+<section>
+    <h2>Other Native-like features</h2>
+
+    <ul class="no-burn">
+        <li>GeoLocation: for navigation</li>
+        <li>ServiceWorker: for offline apps</li>
+    </ul>
+
 </section>
 
 <!-- Danke Slide -->
 <section>
-  <h1>Vielen Dank!</h1>
-  <h2 class="fragment">Fragen?</h2>
-  <div>
-    <img style="height: 200px" src="img/test/ThomasEndres.jpg">
-    <img style="height: 200px" src="img/test/EricWeikl.jpg">
-    <img style="height: 200px" src="img/test/MichaelPisula.png">
-  </div>
-  <p>
-    <a href="mailto:john.doe@tngtech.com">john.doe@tngtech.com</a><br>
-    <a href="https://www.xing.com/profile/John_Doe/">https://www.xing.com/profile/John_Doe</a><br>
-    <a href="http://www.twitter.com/johndoe">@johndoe</a>
-  </p>
-  <a href="http://www.tngtech.com"><img class="logo" src="img/tng.svg"></a>
+    <h1>Thank you!</h1>
+
+    <h2 class="fragment">Questions?</h2>
+
+    <div>
+        <!--img style="height: 200px" src="img/test/FranziskaHinkelmann.jpg" -->
+    </div>
+    <p style="text-align:center">
+        <a href="mailto:franziska.hinkelmann@tngtech.com">franziska.hinkelmann@tngtech.com</a><br>
+        <a href="http://www.twitter.com/fhinkel">@fhinkel</a>
+    </p>
+    <a href="http://www.tngtech.com"><img class="logo" src="img/tng.svg"></a>
 </section>
 
 </body>

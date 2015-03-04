@@ -19,7 +19,7 @@ p {
 
 .rotatingImage {
     margin: -60px 0 0 -60px;
-    -webkit-animation: spin 20s linear;
+    -webkit-animation: spin 30s linear infinite;
     -webkit-animation-fill-mode: forwards;
     -moz-animation: spin 40s linear infinite;
     animation: spin 40s linear infinite;
@@ -32,11 +32,11 @@ p {
 }
 
 @-webkit-keyframes spin {
-    100% { -webkit-transform: rotate(-90deg) }
+    100% { -webkit-transform: rotate(360deg) }
 }
 
 @-webkit-keyframes CW {
-    100% { -webkit-transform: rotate(-90deg) }
+    100% { -webkit-transform: rotate(360deg) }
 }
 @-webkit-keyframes CCW {
     100% { -webkit-transform: rotate(0deg) }

@@ -352,18 +352,131 @@ if(event.webkitCompassHeading) {
 <section data-markdown class="handsOn">
     <script type="text/template">
         ## Service Worker
-        *
+        * Ability to intercept and handle network requests, programmatically caching responses
+        * Push messages
+        * Background sync,
+        * Geofencing
     </script>
 </section>
 
-<section>
-    <h2>Other Native-like features</h2>
+<section data-markdown class="handsOn">
+    <script type="text/template">
+        ## Service Worker
+        * A script that is run by your browser in the background
+        * It's a JavaScript Worker, so it can't access the DOM directly
+        * HTTPS is needed!
+        * Chrome (Canary for Push Notifications) or Firefox Nightly
+    </script>
+</section>
 
-    <ul class="no-burn">
-        <li>GeoLocation: for navigation</li>
-        <li>ServiceWorker: for offline apps</li>
-    </ul>
+<section data-markdown class="handsOn">
+    <script type="text/template">
+        ### Service Worker Lifecycle
 
+        * A service worker has a lifecycle which is completely separate from your web page
+        *To install a service worker for your site, you need to register site for a service worker, which you do in your page's JavaScript.
+        * When we're installed, the activation step will follow and this is a great opportunity for handling any management of old caches,
+    </script>
+</section>
+
+<section data-markdown class="handsOn">
+    <script type="text/template">
+        ### Network Intercepting
+```JavaScript
+        self.addEventListener('fetch', function(event) {
+        console.log(event.request);
+        });
+```
+        ```JavaScript
+        self.addEventListener('fetch', function(event) {
+        event.respondWith(new Response("Hello world!"));
+        });
+        ```
+    </script>
+</section>
+
+<section data-markdown class="handsOn">
+    <script type="text/template">
+        ### Caching API
+```JavaScript
+self.addEventListener('install', function(event) {
+  // pre cache a load of stuff:
+  event.waitUntil(
+    caches.open('myapp-static-v1').then(function(cache) {
+      return cache.addAll(['/', '/all.css', '/bg.png', '/all.js']);
+    })
+  )
+});
+
+self.addEventListener('fetch', function(event) {
+  event.respondWith(caches.match(event.request).then(function(response) {
+    return response || fetch(event.request);
+    })
+  );
+});
+```
+    </script>
+</section>
+
+<section data-markdown class="handsOn">
+    <script type="text/template">
+        ### Push Notifications
+        * The app requests permission to send push messages.
+        * If permission is granted, a registration ID is given to the app.
+        * The app will then send the registration ID to it's own server.
+        * The server will then send some data and the registration ID to a push notification service (In Google's case this is Google Cloud Message, a.k.a. GCM).
+        * The push service will then use the registration ID to send the data to the correct device and app.
+    </script>
+</section>
+
+<section data-markdown class="handsOn">
+    <script type="text/template">
+        ### From Push Provider to the Device
+        ```JavaScript
+        self.addEventListener('push', function(e) {
+            console.log('Push Event Received');
+
+            return new Notification('New message!', {
+               body: 'here is a new message',
+            });
+        });
+        ```
+    </script>
+</section>
+
+
+<section data-markdown class="handsOn">
+    <script type="text/template">
+    ![](img/Push.png)
+    </script>
+</section>
+
+
+<section data-markdown class="handsOn">
+    <script type="text/template">
+        ### Background Sync
+        ```JavaScript
+        navigator.serviceWorker.register("/sw.js");
+
+        navigator.serviceWorker.ready.then(function(swRegistration) {
+            // Returns a Promise
+            swRegistration.syncManager.register({
+               id: "periodicSync",
+               minDelay: 60 * 60 * 1000,
+               maxDelay: 0,
+               minPeriod: 12 * 60 * 60 * 1000,
+               minRequiredNetwork: "network-non-mobile"
+               allowOnBattery: true
+               idleRequired: false
+            })
+            .then(function() { // Success
+            },
+            function() { // Failure
+               // User/UA denied permission
+            });
+        });
+        ```
+    </script>
 </section>
 
 <!-- Danke Slide -->

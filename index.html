@@ -429,6 +429,23 @@ self.addEventListener('fetch', function(event) {
     </script>
 </section>
 
+
+<section data-markdown class="handsOn">
+    <script type="text/template">
+        ```JavaScript
+        navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
+            serviceWorkerRegistration.push.register()
+              .then(function(pushSubscription) {
+               sendSubscription(pushSubscription);
+            })
+            .catch(function(e) {
+               console.error('Unable to register for push', e);
+            });
+        });
+        ```
+    </script>
+</section>
+
 <section data-markdown class="handsOn">
     <script type="text/template">
         ### From Push Provider to the Device

@@ -54,16 +54,15 @@
 <!-- Titel-Slide -->
 <section>
     <h2>Mobile Web Apps with <p></p><i>Native App</i> Features</h2>
-    <!-- FIXME -->
     <h4>or</h4>
 
-    <h3> How to Access Orientation and Motion Data</h3>
+    <!--h3> How to Access Orientation and Motion Data</h3-->
 
     <p style="padding-top:15%; text-align:center;">
         <a href="mailto:franziska.hinkelmann@tngtech.com">Franziska Hinkelmann</a>
 
-    <h3>JavaScript UserGroup Munich</h3>
-    Munich, 2015-01-08
+    <h3>.concat()</h3>
+    Salzburg, 2015-03-07
     </p>
     <a href="http://www.tngtech.com"><img class="logo" src="img/tng.svg"></a>
 </section>
@@ -127,15 +126,15 @@
     </p>
 <pre><code class="javascript">if (window.DeviceOrientationEvent) {
     window.addEventListener('deviceorientation', function(eventData) {
-    ...
+        ...
     });
-    )
-    if ((window.DeviceMotionEvent) {
+)
+if ((window.DeviceMotionEvent) {
     window.addEventListener('devicemotion', function(eventData) {
-    ...
+        ...
     });
-    )</code></pre>
-    <p>Supported in current versions of iOS Safari, Chrome, Firefox, IE11</p>
+)</code></pre>
+    <p>Supported in current versions of iOS Safari, Chrome, Firefox, IE11.</p>
 </section>
 
 <section data-title="DeviceOrientation">
@@ -182,12 +181,12 @@
 <section>
 <pre style="font-size:0.7em"><code class="javascript" data-noescape>
 window.addEventListener('^1^deviceorientation^^', function(eventData) {
-    var tiltLR = eventData.^2^gamma^^;
+    var direction = eventData.^2^alpha^^;
     var tiltFB = eventData.^3^beta^^;
-    var direction = eventData.^4^alpha^^;
+    var tiltLR = eventData.^4^gamma^^;
 
-    doSomethingWith(tiltLR, tiltFB, direction);
-}, false); </code></pre>
+    doSomethingWith(direction, tiltFB, tiltLR);
+}); </code></pre>
 </section>
 
 <section data-title="DeviceMotion">
@@ -348,6 +347,13 @@ if(event.webkitCompassHeading) {
         <img src="img/duck.png" style="width:400px;">
     </div>
     </div>
+</section>
+
+<section data-markdown class="handsOn">
+    <script type="text/template">
+        ## Service Worker
+        *
+    </script>
 </section>
 
 <section>

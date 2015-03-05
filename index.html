@@ -379,20 +379,22 @@ if(event.webkitCompassHeading) {
 <section data-markdown >
     <script type="text/template">
         ### Service Worker Lifecycle
-        * To install a service worker for your site, you need to register site for a service worker, which you do in your page's JavaScript.
-        * When we're installed, the activation step will follow and this is a great opportunity for handling any management of old caches,
+        * Download
+        * Install: create caches
+        * Activate: handle management of old caches
     </script>
 </section>
 
 <section data-markdown >
     <script type="text/template">
         ### Register a service worker
+        * To install a service worker for your site, you need to register for a service worker, which you do in your page's JavaScript.
         In the page
         ```JavaScript
         navigator.serviceWorker.register('worker.js').then(function(registration) {
             console.log("Registered!");
         }).catch(function(err) {
-            conole.log("Error", err);
+            console.log("Error", err);
         });
         ```
         In worker.js
@@ -457,6 +459,8 @@ if(event.webkitCompassHeading) {
 <section data-markdown >
     <script type="text/template">
         ### Caching API
+        * ServiceWorker comes with a caching API.
+
         In worker.js
         ```JavaScript
         self.addEventListener('install', function(event) {
@@ -483,7 +487,8 @@ if(event.webkitCompassHeading) {
         * The app requests permission to send push messages.
         * If permission is granted, a registration ID is given to the app.
         * The app will then send the registration ID to it's own server.
-        * The server will then send some data and the registration ID to a push notification service (In Google's case this is Google Cloud Message, a.k.a. GCM).
+        * The server will then send some data and the registration ID to a push notification service, e.g.,
+        Google Cloud Messaging, Apple Push Notification Service
         * The push service will then use the registration ID to send the data to the correct device and app.
     </script>
 </section>

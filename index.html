@@ -388,6 +388,26 @@ if(event.webkitCompassHeading) {
     <script type="text/template">
         ### Register a service worker
         In the page
+        ```JavaScript
+        navigator.serviceWorker.register('worker.js').then(function(registration) {
+            console.log("Registered!");
+        }).catch(function(err) {
+            conole.log("Error", err);
+        });
+        ```
+        In worker.js
+        ```JavaScript
+        self.addEventListener('install', function(event) {
+        console.log("Service worker installed!);
+        });
+        ```
+    </script>
+</section>
+
+<section data-markdown >
+    <script type="text/template">
+        ### Network Intercepting
+        In worker.js
         ```HTML
         <html>
             <body>
@@ -404,7 +424,6 @@ if(event.webkitCompassHeading) {
 
 <section data-markdown >
     <script type="text/template">
-        ### Network Intercepting
         In worker.js
         ```JavaScript
         self.addEventListener('fetch', function(event) {
@@ -541,18 +560,25 @@ if(event.webkitCompassHeading) {
     </script>
 </section>
 
-    <section data-markdown >
-        <script type="text/template">
-        
-            </script>
-        </section>
+<section data-markdown >
+    <script type="text/template">
+       ## Summary
+
+        * Shake gestures
+        * Caching
+        * Push Notifications
+        * Background syncing
+
+        Your web app can do all of that!
+
+    </script>
+</section>
     
 
 <!-- Danke Slide -->
 <section>
     <h1>Thank you!</h1>
 
-    <h2 class="fragment">Questions?</h2>
 
     <div>
         <!--img style="height: 200px" src="img/test/FranziskaHinkelmann.jpg" -->

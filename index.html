@@ -349,7 +349,7 @@ if(event.webkitCompassHeading) {
     </div>
 </section>
 
-<section data-markdown class="handsOn">
+<section data-markdown >
     <script type="text/template">
         ## Service Worker
         * Ability to intercept and handle network requests, programmatically caching responses
@@ -359,7 +359,7 @@ if(event.webkitCompassHeading) {
     </script>
 </section>
 
-<section data-markdown class="handsOn">
+<section data-markdown >
     <script type="text/template">
         ## Service Worker
         * A script that is run by your browser in the background
@@ -369,56 +369,73 @@ if(event.webkitCompassHeading) {
     </script>
 </section>
 
-<section data-markdown class="handsOn">
+<section data-markdown >
     <script type="text/template">
         ### Service Worker Lifecycle
 
         * A service worker has a lifecycle which is completely separate from your web page
-        *To install a service worker for your site, you need to register site for a service worker, which you do in your page's JavaScript.
+        * To install a service worker for your site, you need to register site for a service worker, which you do in your page's JavaScript.
         * When we're installed, the activation step will follow and this is a great opportunity for handling any management of old caches,
     </script>
 </section>
 
-<section data-markdown class="handsOn">
+<section data-markdown >
+    <script type="text/template">
+        ### Register a service worker
+        In the page
+        ```JavaScript
+        navigator.serviceWorker.register('/worker.js').then(function(registration) {
+            console.log('ServiceWorker registration successful);
+        }, function(error) {
+            console.log('ServiceWorker registration failed: ', error);
+        });
+        ```
+        </script>
+    </section>
+
+<section data-markdown >
     <script type="text/template">
         ### Network Intercepting
-```JavaScript
-        self.addEventListener('fetch', function(event) {
-        console.log(event.request);
-        });
-```
+        In worker.js
         ```JavaScript
         self.addEventListener('fetch', function(event) {
-        event.respondWith(new Response("Hello world!"));
+            console.log(event.request);
+        });
+        ```
+
+        ```JavaScript
+        self.addEventListener('fetch', function(event) {
+            event.respondWith(new Response("Hello world!"));
         });
         ```
     </script>
 </section>
 
-<section data-markdown class="handsOn">
+<section data-markdown >
     <script type="text/template">
         ### Caching API
-```JavaScript
-self.addEventListener('install', function(event) {
-  // pre cache a load of stuff:
-  event.waitUntil(
-    caches.open('myapp-static-v1').then(function(cache) {
-      return cache.addAll(['/', '/all.css', '/bg.png', '/all.js']);
-    })
-  )
-});
+        In worker.js
+        ```JavaScript
+        self.addEventListener('install', function(event) {
+          // pre cache a load of stuff:
+          event.waitUntil(
+            caches.open('myapp-static-v1').then(function(cache) {
+              return cache.addAll(['/', '/all.css', '/bg.png', '/all.js']);
+            })
+          )
+        });
 
-self.addEventListener('fetch', function(event) {
-  event.respondWith(caches.match(event.request).then(function(response) {
-    return response || fetch(event.request);
-    })
-  );
-});
-```
+        self.addEventListener('fetch', function(event) {
+          event.respondWith(caches.match(event.request).then(function(response) {
+            return response || fetch(event.request);
+            })
+          );
+        });
+        ```
     </script>
 </section>
 
-<section data-markdown class="handsOn">
+<section data-markdown >
     <script type="text/template">
         ### Push Notifications
         * The app requests permission to send push messages.
@@ -430,8 +447,9 @@ self.addEventListener('fetch', function(event) {
 </section>
 
 
-<section data-markdown class="handsOn">
+<section data-markdown >
     <script type="text/template">
+        In the page
         ```JavaScript
         navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
             serviceWorkerRegistration.push.register()
@@ -446,11 +464,12 @@ self.addEventListener('fetch', function(event) {
     </script>
 </section>
 
-<section data-markdown class="handsOn">
+<section data-markdown >
     <script type="text/template">
         ### From Push Provider to the Device
+        In worker.js
         ```JavaScript
-        self.addEventListener('push', function(e) {
+        this.addEventListener('push', function(e) {
             console.log('Push Event Received');
 
             return new Notification('New message!', {
@@ -461,23 +480,37 @@ self.addEventListener('fetch', function(event) {
     </script>
 </section>
 
+<section data-markdown >
+    <script type="text/template">
+    In worker.js
+    ```JavaScript
+    this.addEventListener('notificationclick', function(e) {
+      // respond to click
+    });
+    ```
+</script>
 
-<section data-markdown class="handsOn">
+</section>
+
+<section data-markdown >
     <script type="text/template">
     ![](img/Push.png)
     </script>
 </section>
 
 
-<section data-markdown class="handsOn">
+<section data-markdown >
     <script type="text/template">
         ### Background Sync
-        ```JavaScript
-        navigator.serviceWorker.register("/sw.js");
+        * register for sync event to do something when the user has a connection
 
-        navigator.serviceWorker.ready.then(function(swRegistration) {
+        In the page
+        ```JavaScript
+        navigator.serviceWorker.register("/worker.js");
+
+        navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
             // Returns a Promise
-            swRegistration.syncManager.register({
+            serviceWorkerRegistration.sync.register('empty-outbox', {
                id: "periodicSync",
                minDelay: 60 * 60 * 1000,
                maxDelay: 0,
@@ -495,6 +528,12 @@ self.addEventListener('fetch', function(event) {
         ```
     </script>
 </section>
+
+    <section data-markdown >
+        <script type="text/template">
+            </script>
+        </section>
+    
 
 <!-- Danke Slide -->
 <section>

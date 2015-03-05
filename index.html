@@ -398,11 +398,19 @@ if(event.webkitCompassHeading) {
         In worker.js
         ```JavaScript
         self.addEventListener('install', function(event) {
-        console.log("Service worker installed!);
+            console.log("Service worker installed!);
         });
         ```
     </script>
 </section>
+
+
+<section data-markdown >
+    <script type="text/template">
+    ![](img/DevTools.png)
+    </script>
+</section>
+
 
 <section data-markdown >
     <script type="text/template">
@@ -452,9 +460,8 @@ if(event.webkitCompassHeading) {
         In worker.js
         ```JavaScript
         self.addEventListener('install', function(event) {
-          // pre cache a load of stuff:
           event.waitUntil(
-            caches.open('myapp-static-v1').then(function(cache) {
+            caches.create('myapp-static-v1').then(function(cache) {
               return cache.addAll(['/', '/all.css', '/bg.png', '/all.js']);
             })
           )
@@ -491,8 +498,8 @@ if(event.webkitCompassHeading) {
               .then(function(pushSubscription) {
                sendSubscription(pushSubscription);
             })
-            .catch(function(e) {
-               console.error('Unable to register for push', e);
+            .catch(function(error) {
+               console.error('Unable to register for push', error);
             });
         });
         ```
@@ -504,7 +511,7 @@ if(event.webkitCompassHeading) {
         ### From Push Provider to the Device
         In worker.js
         ```JavaScript
-        this.addEventListener('push', function(e) {
+        this.addEventListener('push', function(event) {
             console.log('Push Event Received');
 
             return new Notification('New message!', {
@@ -527,49 +534,55 @@ if(event.webkitCompassHeading) {
     <script type="text/template">
         In worker.js
         ```JavaScript
-        this.addEventListener('notificationclick', function(e) {
-        // respond to click
+        this.addEventListener('notificationclick', function(event) {
+          // respond to click
         });
         ```
     </script>
 </section>
 
 
-<section data-markdown >
-    <script type="text/template">
-        ### Background Sync
-        * register for sync event to do something when the user has a connection
+<section >
+        <h3> Background Sync </h3>
+        <p>Register for sync event to do something when the user has a connection</p>
 
-        In the page
-        ```JavaScript
-        serviceWorkerRegistration.sync.register('empty-outbox', {
-           id: "periodicSync",
-           minDelay: 60 * 60 * 1000,
-           maxDelay: 0,
-           minPeriod: 12 * 60 * 60 * 1000,
-           minRequiredNetwork: "network-non-mobile"
-           allowOnBattery: true
-           idleRequired: false
-        })
-        .then(function() { // Success
-        },
-        function() { // Failure
-           // User/UA denied permission
-        });
-        ```
-    </script>
+        <p>In the page</p>
+        <pre><code class="javascript">sendEmail(data).catch(function() {
+    return saveToOutbox(data).then(function() {
+        return navigator.serviceWorker.ready;
+    }).then(function(serviceWorkerRegistration) {
+        return serviceWorkerRegistration.sync.register('empty-outbox');
+    });
+}); </code> </pre>
 </section>
 
+<section >
+    <h3>Background Sync</h3>
+    <p>In worker.js</p>
+    <pre><code class="JAVASCRIPT">this.addEventListener('sync', function(event) {
+    if (event.id == 'empty-outbox') {
+        event.waitUntil(
+            getOutbox().then(function(emails) {
+                return Promise.all(
+                    emails.map(function(email) {
+                        return sendEmail(email);
+                    })
+                );
+            })
+        );
+    }
+});</code></pre>
+</section>
+
+
 <section data-markdown >
     <script type="text/template">
-       ## Summary
-
         * Shake gestures
         * Caching
         * Push Notifications
         * Background syncing
 
-        Your web app can do all of that!
+        ## Your web app can do all of that!
 
     </script>
 </section>

@@ -370,7 +370,7 @@ if(event.webkitCompassHeading) {
         ## Service Worker
         * Programmatically caching responses
         * Push messaging
-        * Background syncinc
+        * Background syncing
     </script>
 </section>
 
@@ -515,21 +515,19 @@ this.addEventListener('fetch', function(event) {
     </script>
 </section>
 
-<section data-markdown >
-    <script type="text/template">
-        ### From Push Provider to the Device
-        In worker.js
-        ```JavaScript
-        this.addEventListener('push', function(event) {
-            console.log('Push Event Received');
-
+<section >
+    <h3>From Push Provider to the Device</h3>
+    <p>In worker.js</p>
+    <pre><code class="javascript">this.addEventListener('push', function(event) {
+    console.log('Push Event Received');
+    event.waitUntil(
+        updatedCaches().then(function() {
             return new Notification('New message!', {
                body: 'here is a new message',
             });
-        });
-        ```
-    </script>
-</section>
+        })
+    );
+});</code></pre> </section>
 
 
 
@@ -569,6 +567,17 @@ this.addEventListener('fetch', function(event) {
         );
     }
 });</code></pre>
+</section>
+
+<section >
+    <h3>Periodic Sync </h3>
+
+    <p>In the page</p>
+        <pre><code class="javascript">navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
+    serviceWorkerRegistration.sync.register('send-emails', {
+        minInterval: 60 * 60 * 1000
+    });
+}); </code> </pre>
 </section>
 
 

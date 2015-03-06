@@ -369,8 +369,8 @@ if(event.webkitCompassHeading) {
     <script type="text/template">
         ## Service Worker
         * Programmatically caching responses
-        * Push messages
-        * Background sync
+        * Push messaging
+        * Background syncinc
     </script>
 </section>
 
@@ -398,7 +398,7 @@ if(event.webkitCompassHeading) {
 }); </code> </pre>
 
     <p>In worker.js</p>
-    <pre><code class="javascript">self.addEventListener('install', function(event) {
+    <pre><code class="javascript">this.addEventListener('install', function(event) {
     console.log("Service worker installed!);
 });</code> </pre>
 
@@ -414,7 +414,7 @@ if(event.webkitCompassHeading) {
 
 <section >
     <h3>Network Intercepting</h3>
-    <p>In worker.js</p>
+    <p>In the page</p>
     <pre><code class="html">&lt;html>
     &lt;body>
         You should get a different response when you refresh
@@ -431,7 +431,7 @@ if(event.webkitCompassHeading) {
 
 <section >
     <p>In worker.js</p>
-    <pre><code class="javascript">self.addEventListener('fetch', function(event) {
+    <pre><code class="javascript">this.addEventListener('fetch', function(event) {
     console.log(event.request);
     event.respondWith(new Response("Hello world!"));
 }); </code> </pre>
@@ -454,7 +454,7 @@ if(event.webkitCompassHeading) {
     <p>Service Worker comes with a caching API.</p>
 
     <p>In worker.js</p>
-    <pre><code class="javascript">self.addEventListener('install', function(event) {
+    <pre><code class="javascript">this.addEventListener('install', function(event) {
     event.waitUntil(
         caches.create('myapp-static-v1').then(function(cache) {
             return cache.addAll([
@@ -467,7 +467,7 @@ if(event.webkitCompassHeading) {
     );
 });
 
-self.addEventListener('fetch', function(event) {
+this.addEventListener('fetch', function(event) {
     event.respondWith(
         caches.match(event.request).then(function(response) {
             return response || fetch(event.request);
@@ -576,7 +576,7 @@ self.addEventListener('fetch', function(event) {
     <script type="text/template">
         * Shake gestures
         * Caching
-        * Push Notifications
+        * Push notifications
         * Background syncing
 
         ## Your web app can do all of that!

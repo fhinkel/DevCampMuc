@@ -354,7 +354,7 @@ if(event.webkitCompassHeading) {
 
 <section>
     <p>Wrap acceleration code in a class that has device detection</p>
-    <div class="fragment">Because axes matters!<br><br>
+    <div class="fragment">Because axes matter!<br><br>
     <br>
 
     <div class="rotatingImage">
@@ -422,7 +422,7 @@ if(event.webkitCompassHeading) {
             navigator.serviceWorker.register('worker.js').then(function(reg) {
                 console.log("Registered!");
             }).catch(function(error) {
-                conole.log("Error", error);
+                console.log("Error", error);
             });
         &lt;/script>
     &lt;/body>
@@ -489,11 +489,11 @@ this.addEventListener('fetch', function(event) {
     <script type="text/template">
         ### Push Notifications
         * The app requests permission to send push messages.
-        * If permission is granted, a registration ID is given to the app.
-        * The app will then send the registration ID to it's own server.
-        * The server will then send some data and the registration ID to a push notification service, e.g.,
+        * If permission is granted, a pushSubscription is given to the app.
+        * The app will then send the pushSubscription to it's own server.
+        * The server will then send some data and the pushSubscriptionID to the push notification service, e.g.,
         Google Cloud Messaging, Apple Push Notification Service
-        * The push service will then use the registration ID to send the data to the correct device and app.
+        * The push service will then use the pushSubscriptioinID to send the data to the correct device and app.
     </script>
 </section>
 
@@ -594,7 +594,6 @@ this.addEventListener('fetch', function(event) {
 </section>
     
 
-<!-- Danke Slide -->
 <section>
     <h1>Thank you!</h1>
 

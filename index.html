@@ -55,7 +55,6 @@
 <section>
     <h2>Mobile Web Apps with <p></p><i>Native App</i> Features</h2>
 
-    <!--h3> How to Access Orientation and Motion Data</h3-->
 
     <p style="padding-top:15%; text-align:center;">
         <a href="mailto:franziska.hinkelmann@tngtech.com">Franziska Hinkelmann</a>
@@ -64,6 +63,16 @@
     Salzburg, 2015-03-07
     </p>
     <a href="http://www.tngtech.com"><img class="logo" src="img/tng.svg"></a>
+</section>
+
+<section data-markdown >
+    <script type="text/template">
+        ## Features
+        * Offline data storage
+        * Background sync
+        * Push notifications
+        * Accelerometer and gyroscope data
+    </script>
 </section>
 
 
@@ -85,7 +94,8 @@
             <li>Platform independent</li>
             <li>No AppStore</li>
             <li>No installation required by user</li>
-            <li>Same programming languages</li>
+            <li>Same programming languages <br>
+                as web development</li>
         </ul>
 
     </div>
@@ -308,7 +318,7 @@ window.addEventListener('devicemotion', function (eventData) {
 
 <section>
     <h4>Try it: <a href="http://bit.ly/concat2015">http://bit.ly/concat2015</a></h4>
-    <video height="700" controls>
+    <video height="700" controls autoplay>
         <source src="img/MotionDevicecopy.m4v" type="video/mp4">
         Your browser does not support the video tag.
     </video>
@@ -361,49 +371,37 @@ if(event.webkitCompassHeading) {
         * Programmatically caching responses
         * Push messages
         * Background sync
-        * Geofencing
     </script>
 </section>
 
 <section data-markdown >
     <script type="text/template">
         ## Service Worker
-        * A script that is run by your browser in the background
+        * JavaScript Worker run by your browser in the background
         * Lifecycle which is separate from your web page
-        * JavaScript Worker, so it can't access the DOM directly
+        * Cannot access the DOM directly
         * HTTPS is needed!
-        * Chrome (Canary for Push Notifications) or Firefox Nightly
+        * Chrome, Opera or Firefox Nightly
     </script>
 </section>
 
-<section data-markdown >
-    <script type="text/template">
-        ### Service Worker Lifecycle
-        * Download
-        * Install: create caches
-        * Activate: handle management of old caches
-    </script>
-</section>
 
-<section data-markdown >
-    <script type="text/template">
-        ### Register a service worker
-        * To install a service worker for your site, you need to register for a service worker, which you do in your page's JavaScript.
-        In the page
-        ```JavaScript
-        navigator.serviceWorker.register('worker.js').then(function(registration) {
-            console.log("Registered!");
-        }).catch(function(err) {
-            console.log("Error", err);
-        });
-        ```
-        In worker.js
-        ```JavaScript
-        self.addEventListener('install', function(event) {
-            console.log("Service worker installed!);
-        });
-        ```
-    </script>
+<section >
+    <h3>Register a service worker</h3>
+    <p>To install a service worker for your site, you need to
+        register for a service worker</p>
+    <p>In the page</p>
+    <pre><code class="javascript">navigator.serviceWorker.register('worker.js').then(function(registration) {
+    console.log("Registered!");
+}).catch(function(err) {
+    console.log("Error", err);
+}); </code> </pre>
+
+    <p>In worker.js</p>
+    <pre><code class="javascript">self.addEventListener('install', function(event) {
+    console.log("Service worker installed!);
+});</code> </pre>
+
 </section>
 
 
@@ -414,34 +412,29 @@ if(event.webkitCompassHeading) {
 </section>
 
 
-<section data-markdown >
-    <script type="text/template">
-        ### Network Intercepting
-        In worker.js
-        ```HTML
-        <html>
-            <body>
-            You should get a different response when you refresh
-            <script>
-               navigator.serviceWorker.register('worker.js').then(function(registration) {
-              console.log("Registered!");
-               }).catch(function(err) {
-              conole.log("Error", err);
-               });
-        ```
-        </script>
-    </section>
+<section >
+    <h3>Network Intercepting</h3>
+    <p>In worker.js</p>
+    <pre><code class="html">&lt;html>
+    &lt;body>
+        You should get a different response when you refresh
+        &lt;script>
+            navigator.serviceWorker.register('worker.js').then(function(reg) {
+                console.log("Registered!");
+            }).catch(function(error) {
+                conole.log("Error", error);
+            });
+        &lt;/script>
+    &lt;/body>
+&lt;/html> </code> </pre>
+</section>
 
-<section data-markdown >
-    <script type="text/template">
-        In worker.js
-        ```JavaScript
-        self.addEventListener('fetch', function(event) {
-            console.log(event.request);
-            event.respondWith(new Response("Hello world!"));
-        });
-        ```
-    </script>
+<section >
+    <p>In worker.js</p>
+    <pre><code class="javascript">self.addEventListener('fetch', function(event) {
+    console.log(event.request);
+    event.respondWith(new Response("Hello world!"));
+}); </code> </pre>
 </section>
 
 <section data-markdown >
@@ -456,28 +449,39 @@ if(event.webkitCompassHeading) {
     </script>
 </section>
 
+<section >
+    <h3>Caching API</h3>
+    <p>Service Worker comes with a caching API.</p>
+
+    <p>In worker.js</p>
+    <pre><code class="javascript">self.addEventListener('install', function(event) {
+    event.waitUntil(
+        caches.create('myapp-static-v1').then(function(cache) {
+            return cache.addAll([
+                '/',
+                '/styles/all.css',
+                '/styles/imgs/bg.png',
+                '/scripts/all.js'
+            ]);
+        })
+    );
+});
+
+self.addEventListener('fetch', function(event) {
+    event.respondWith(
+        caches.match(event.request).then(function(response) {
+            return response || fetch(event.request);
+        })
+    );
+}); </code></pre>
+</section>
+
 <section data-markdown >
     <script type="text/template">
-        ### Caching API
-        * ServiceWorker comes with a caching API.
-
-        In worker.js
-        ```JavaScript
-        self.addEventListener('install', function(event) {
-          event.waitUntil(
-            caches.create('myapp-static-v1').then(function(cache) {
-              return cache.addAll(['/', '/all.css', '/bg.png', '/all.js']);
-            })
-          )
-        });
-
-        self.addEventListener('fetch', function(event) {
-          event.respondWith(caches.match(event.request).then(function(response) {
-            return response || fetch(event.request);
-            })
-          );
-        });
-        ```
+        ### Service Worker Lifecycle
+        * Download
+        * Install: create caches
+        * Activate: handle management of old caches
     </script>
 </section>
 
@@ -535,18 +539,6 @@ if(event.webkitCompassHeading) {
     </script>
 </section>
 
-<section data-markdown >
-    <script type="text/template">
-        In worker.js
-        ```JavaScript
-        this.addEventListener('notificationclick', function(event) {
-          // respond to click
-        });
-        ```
-    </script>
-</section>
-
-
 <section >
         <h3> Background Sync </h3>
         <p>Register for sync event to do something when the user has a connection</p>
@@ -597,7 +589,7 @@ if(event.webkitCompassHeading) {
 <section>
     <h1>Thank you!</h1>
 
-
+<br>
     <div>
         <!--img style="height: 200px" src="img/test/FranziskaHinkelmann.jpg" -->
     </div>

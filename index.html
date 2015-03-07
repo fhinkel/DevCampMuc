@@ -103,7 +103,7 @@
 
 <section>
     <video height="750" controls autoplay>
-        <source src="img/M2.m4v" type="video/mp4">
+        <source src="img/M2-1.m4v" type="video/mp4">
         Your browser does not support the video tag.
     </video>
 </section>
@@ -391,6 +391,14 @@ if(event.webkitCompassHeading) {
     </script>
 </section>
 
+<section>
+    <h2>Better experience with no or slow network connection</h2>
+
+    <img style="height: 250px" src="img/email-icon.jpeg">
+    <img style="height: 250px" src="img/Twitter-icon.png">
+    <img style="height: 250px" src="img/fotos-icon.png">
+</section>
+
 <section data-markdown >
     <script type="text/template">
         ## Service Worker
@@ -408,7 +416,7 @@ if(event.webkitCompassHeading) {
     <p>To install a service worker for your site, you need to
         register for a service worker</p>
     <p>In the page</p>
-    <pre><code class="javascript" data-noescape="">>navigator.^^serviceWorker.register^^('worker.js').then(function(registration) {
+    <pre><code class="javascript" data-noescape="">navigator.^^serviceWorker.register^^('worker.js').then(function(registration) {
     console.log("Registered!");
 }).catch(function(err) {
     console.log("Error", err);
@@ -452,7 +460,7 @@ this.addEventListener('activate', function(event) {
 
 <section >
     <p>In worker.js</p>
-    <pre><code class="javascript" data-noescape="">this.addEventListener(^^'fetch'^, function(event) {
+    <pre><code class="javascript" data-noescape="">this.addEventListener(^^'fetch'^^, function(event) {
     console.log(event.request);
     event.respondWith(^^new Response("Hello world!")^^);
 }); </code> </pre>
@@ -491,7 +499,7 @@ this.addEventListener('activate', function(event) {
 this.addEventListener('fetch', function(event) {
     event.respondWith(
         ^^caches.match^^(event.request).then(function(response) {
-            return ^^response^^ || ^^fetch(event.request)^;
+            return ^^response^^ || ^^fetch(event.request)^^;
         })
     );
 }); </code></pre>
@@ -524,7 +532,7 @@ this.addEventListener('fetch', function(event) {
     <pre><code class="javascript" data-noescape="">navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
     serviceWorkerRegistration.^^push.register^^()
         .then(function(pushSubscription) {
-        sendSubscription(pushSubscription);
+        sendSubscription(^^pushSubscription^^);
     })
     .catch(function(error) {
         console.error('Unable to register for push', error);
@@ -563,7 +571,7 @@ this.addEventListener('fetch', function(event) {
     return ^^saveToOutbox(data)^^.then(function() {
         return navigator.serviceWorker.ready;
     }).then(function(serviceWorkerRegistration) {
-        return serviceWorkerRegistration.^^sync.register^^(^^'empty-outbox'^);
+        return serviceWorkerRegistration.^^sync.register^^(^^'empty-outbox'^^);
     });
 }); </code> </pre>
 </section>

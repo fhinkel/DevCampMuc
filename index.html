@@ -102,6 +102,23 @@
 </section>
 
 <section>
+    <video height="750" controls autoplay>
+        <source src="img/M2.m4v" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</section>
+
+<section data-markdown >
+    <script type="text/template">
+        ## Features
+        * Offline data storage
+        * Background sync
+        * Push notifications
+        * Accelerometer and gyroscope data
+    </script>
+</section>
+
+<section>
     <h3>Accelerometer and Gyroscope</h3>
 
     <div>
@@ -391,7 +408,7 @@ if(event.webkitCompassHeading) {
     <p>To install a service worker for your site, you need to
         register for a service worker</p>
     <p>In the page</p>
-    <pre><code class="javascript">navigator.serviceWorker.register('worker.js').then(function(registration) {
+    <pre><code class="javascript" data-noescape="">>navigator.^^serviceWorker.register^^('worker.js').then(function(registration) {
     console.log("Registered!");
 }).catch(function(err) {
     console.log("Error", err);
@@ -399,7 +416,11 @@ if(event.webkitCompassHeading) {
 
     <p>In worker.js</p>
     <pre><code class="javascript">this.addEventListener('install', function(event) {
-    console.log("Service worker installed!);
+    console.log("Service worker installed!");
+});
+
+this.addEventListener('activate', function(event) {
+    console.log("Service worker activated!");
 });</code> </pre>
 
 </section>
@@ -415,9 +436,9 @@ if(event.webkitCompassHeading) {
 <section >
     <h3>Network Intercepting</h3>
     <p>In the page</p>
-    <pre><code class="html">&lt;html>
+    <pre><code class="html" data-noescape="">&lt;html>
     &lt;body>
-        You should get a different response when you refresh
+        ^^You should get a different response when you refresh^^
         &lt;script>
             navigator.serviceWorker.register('worker.js').then(function(reg) {
                 console.log("Registered!");
@@ -431,9 +452,9 @@ if(event.webkitCompassHeading) {
 
 <section >
     <p>In worker.js</p>
-    <pre><code class="javascript">this.addEventListener('fetch', function(event) {
+    <pre><code class="javascript" data-noescape="">this.addEventListener(^^'fetch'^, function(event) {
     console.log(event.request);
-    event.respondWith(new Response("Hello world!"));
+    event.respondWith(^^new Response("Hello world!")^^);
 }); </code> </pre>
 </section>
 
@@ -454,9 +475,9 @@ if(event.webkitCompassHeading) {
     <p>Service Worker comes with a caching API.</p>
 
     <p>In worker.js</p>
-    <pre><code class="javascript">this.addEventListener('install', function(event) {
+    <pre><code class="javascript" data-noescape="">this.addEventListener('install', function(event) {
     event.waitUntil(
-        caches.create('myapp-static-v1').then(function(cache) {
+        ^^caches.create^^('myapp-static-v1').then(function(cache) {
             return cache.addAll([
                 '/',
                 '/styles/all.css',
@@ -469,8 +490,8 @@ if(event.webkitCompassHeading) {
 
 this.addEventListener('fetch', function(event) {
     event.respondWith(
-        caches.match(event.request).then(function(response) {
-            return response || fetch(event.request);
+        ^^caches.match^^(event.request).then(function(response) {
+            return ^^response^^ || ^^fetch(event.request)^;
         })
     );
 }); </code></pre>
@@ -490,7 +511,7 @@ this.addEventListener('fetch', function(event) {
         ### Push Notifications
         * The app requests permission to send push messages.
         * If permission is granted, a pushSubscription is given to the app.
-        * The app will then send the pushSubscription to it's own server.
+        * The app will then send the pushSubscription to its own server.
         * The server will then send some data and the pushSubscriptionID to the push notification service, e.g.,
         Google Cloud Messaging, Apple Push Notification Service
         * The push service will then use the pushSubscriptioinID to send the data to the correct device and app.
@@ -498,31 +519,27 @@ this.addEventListener('fetch', function(event) {
 </section>
 
 
-<section data-markdown >
-    <script type="text/template">
-        In the page
-        ```JavaScript
-        navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
-            serviceWorkerRegistration.push.register()
-              .then(function(pushSubscription) {
-               sendSubscription(pushSubscription);
-            })
-            .catch(function(error) {
-               console.error('Unable to register for push', error);
-            });
-        });
-        ```
-    </script>
+<section  >
+    <p>In the page</p>
+    <pre><code class="javascript" data-noescape="">navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
+    serviceWorkerRegistration.^^push.register^^()
+        .then(function(pushSubscription) {
+        sendSubscription(pushSubscription);
+    })
+    .catch(function(error) {
+        console.error('Unable to register for push', error);
+    });
+});</code> </pre>
 </section>
 
 <section >
     <h3>From Push Provider to the Device</h3>
     <p>In worker.js</p>
-    <pre><code class="javascript">this.addEventListener('push', function(event) {
+    <pre><code class="javascript" data-noescape="">this.addEventListener(^1^'push'^^, function(event) {
     console.log('Push Event Received');
     event.waitUntil(
-        updatedCaches().then(function() {
-            return new Notification('New message!', {
+        ^3^updatedCaches().then(function()^^ {
+            return ^2^new Notification^^('New message!', {
                body: 'here is a new message',
             });
         })
@@ -542,11 +559,11 @@ this.addEventListener('fetch', function(event) {
         <p>Register for sync event to do something when the user has a connection</p>
 
         <p>In the page</p>
-        <pre><code class="javascript">sendEmail(data).catch(function() {
-    return saveToOutbox(data).then(function() {
+        <pre><code class="javascript" data-noescape="">^^sendEmail^^(data).catch(function() {
+    return ^^saveToOutbox(data)^^.then(function() {
         return navigator.serviceWorker.ready;
     }).then(function(serviceWorkerRegistration) {
-        return serviceWorkerRegistration.sync.register('empty-outbox');
+        return serviceWorkerRegistration.^^sync.register^^(^^'empty-outbox'^);
     });
 }); </code> </pre>
 </section>
@@ -554,13 +571,13 @@ this.addEventListener('fetch', function(event) {
 <section >
     <h3>Background Sync</h3>
     <p>In worker.js</p>
-    <pre><code class="JAVASCRIPT">this.addEventListener('sync', function(event) {
+    <pre><code class="javascript" data-noescape="">this.addEventListener(^^'sync'^^, function(event) {
     if (event.id == 'empty-outbox') {
         event.waitUntil(
-            getOutbox().then(function(emails) {
+            ^^getOutbox()^^.then(function(emails) {
                 return Promise.all(
                     emails.map(function(email) {
-                        return sendEmail(email);
+                        return ^^sendEmail^^(email);
                     })
                 );
             })
@@ -573,9 +590,9 @@ this.addEventListener('fetch', function(event) {
     <h3>Periodic Sync </h3>
 
     <p>In the page</p>
-        <pre><code class="javascript">navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
-    serviceWorkerRegistration.sync.register('send-emails', {
-        minInterval: 60 * 60 * 1000
+        <pre><code class="javascript" data-noescape="">navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
+    serviceWorkerRegistration.^^sync.register^^('send-emails', {
+        ^^minInterval^^: 60 * 60 * 1000
     });
 }); </code> </pre>
 </section>

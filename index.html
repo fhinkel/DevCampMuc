@@ -102,10 +102,13 @@
 </section>
 
 <section>
-    <video height="750" controls autoplay>
-        <source src="img/M2-1.m4v" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
+    <img src="img/M21.png">
+</section>
+<section>
+    <img src="img/M22.png">
+</section>
+<section>
+    <img src="img/M23.png">
 </section>
 
 <section data-markdown >
@@ -306,7 +309,7 @@ window.addEventListener('^1^devicemotion^^', function(eventData) {
 </section>
 
 <section data-title="Try it yourself">
-    <h2>Try it: <a href="http://bit.ly/concat2015">http://bit.ly/concat2015</a></h2>
+    <h2>Try it now: <a href="http://bit.ly/concat2015">http://bit.ly/concat2015</a></h2>
 <pre><code class="javascript">window.addEventListener('deviceorientation', function (eventData) {
     document.getElementById("doTiltLR").innerHTML = Math.round(eventData.gamma);
     document.getElementById("doTiltFB").innerHTML = Math.round(eventData.beta);
@@ -333,8 +336,8 @@ window.addEventListener('devicemotion', function (eventData) {
 });</code></pre>
 </section>
 
-<section>
-    <h4>Try it: <a href="http://bit.ly/concat2015">http://bit.ly/concat2015</a></h4>
+<section class="handsOn">
+    <h4>Try it now: <a href="http://bit.ly/concat2015">http://bit.ly/concat2015</a></h4>
     <video height="700" controls autoplay>
         <source src="img/MotionDevicecopy.m4v" type="video/mp4">
         Your browser does not support the video tag.
@@ -377,6 +380,7 @@ if(event.webkitCompassHeading) {
     <div class="rotatingImage">
         <img src="img/duck.png" style="width:400px;">
     </div>
+        <br>
         <br>
         Rabbit or Duck?
     </div>
@@ -471,11 +475,10 @@ this.addEventListener('activate', function(event) {
         ![](img/intercep1.png)
     </script>
 </section>
-<section data-markdown >
-    <script type="text/template">
-        ![](img/intercep2.png)
-        shift+refresh loads the current page without the ServiceWorker
-    </script>
+
+<section class="fragment">
+    <img src="img/intercep2.png">
+    <ul class="fragment">shift+refresh loads the current page without the ServiceWorker</ul>
 </section>
 
 <section >
@@ -514,16 +517,16 @@ this.addEventListener('fetch', function(event) {
     </script>
 </section>
 
-<section data-markdown >
-    <script type="text/template">
-        ### Push Notifications
-        * The app requests permission to send push messages.
-        * If permission is granted, a pushSubscription is given to the app.
-        * The app will then send the pushSubscription to its own server.
-        * The server will then send some data and the pushSubscriptionID to the push notification service, e.g.,
-        Google Cloud Messaging, Apple Push Notification Service
-        * The push service will then use the pushSubscriptioinID to send the data to the correct device and app.
-    </script>
+<section >
+        <h3>Push Notifications</h3>
+    <ul>
+        <li> The app requests permission to send push messages</li>
+        <li> If permission is granted, a pushSubscription is given to the app</li>
+        <li> The app will then send the pushSubscription to its own server</li>
+        <li> The server will then send some data and the pushSubscriptionID to the push notification service, e.g.,
+        Google Cloud Messaging, Apple Push Notification Service</li>
+        <li> The push service will then use the pushSubscriptionID to send the data to the correct device and app</li>
+    </ul>
 </section>
 
 

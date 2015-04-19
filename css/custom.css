@@ -50,3 +50,16 @@ p {
         transform: rotate(45deg);
     }
 }
+.reveal pre code {
+    font-family: Droid Sans Mono, monospace;
+    max-height: 800px;
+    font-size: 140%;
+    line-height: 140%;
+    box-shadow: 0 0 10px black;
+    width: 100%;
+}
+
+.reveal pre {
+    margin: 0;
+    width: 100%;
+}

@@ -59,8 +59,8 @@
     <p style="padding-top:15%; text-align:center;">
         <a href="mailto:franziska.hinkelmann@tngtech.com">Franziska Hinkelmann</a>
 
-    <h3>.concat()</h3>
-    Salzburg, 2015-03-07
+    <h3>Developer Camp Munich</h3>
+    Munich, 2015-04-19
     </p>
     <a href="http://www.tngtech.com"><img class="logo" src="img/tng.svg"></a>
 </section>
@@ -309,7 +309,7 @@ window.addEventListener('^1^devicemotion^^', function(eventData) {
 </section>
 
 <section data-title="Try it yourself">
-    <h2>Try it now: <a href="http://bit.ly/concat2015">http://bit.ly/concat2015</a></h2>
+    <h2>Try it now: <a href="http://bit.ly/devcampmuc">http://bit.ly/devcampmuc</a></h2>
 <pre><code class="javascript">window.addEventListener('deviceorientation', function (eventData) {
     document.getElementById("doTiltLR").innerHTML = Math.round(eventData.gamma);
     document.getElementById("doTiltFB").innerHTML = Math.round(eventData.beta);
@@ -337,8 +337,8 @@ window.addEventListener('devicemotion', function (eventData) {
 </section>
 
 <section class="handsOn">
-    <h4>Try it now: <a href="http://bit.ly/concat2015">http://bit.ly/concat2015</a></h4>
-    <video height="700" controls autoplay>
+    <h4>Try it now: <a href="http://bit.ly/devcampmuc">http://bit.ly/devcampmuc</a></h4>
+    <video height="700" controls autoplay loop>
         <source src="img/MotionDevicecopy.m4v" type="video/mp4">
         Your browser does not support the video tag.
     </video>
@@ -375,14 +375,7 @@ if(event.webkitCompassHeading) {
 <section>
     <p>Wrap acceleration code in a class that has device detection</p>
     <div class="fragment">Because axes matter!<br><br>
-    <br>
-
-    <div class="rotatingImage">
-        <img src="img/duck.png" style="width:400px;">
-    </div>
-        <br>
-        <br>
-        Rabbit or Duck?
+        <img src="img/DuckAxis.png">
     </div>
 </section>
 
@@ -452,10 +445,11 @@ this.addEventListener('activate', function(event) {
     &lt;body>
         ^^You should get a different response when you refresh^^
         &lt;script>
-            navigator.serviceWorker.register('worker.js').then(function(reg) {
-                console.log("Registered!");
-            }).catch(function(error) {
-                console.log("Error", error);
+            navigator.serviceWorker.register('worker.js')
+                .then(function(registration) {
+                    console.log("Registered!");
+                 }).catch(function(error) {
+                    console.log("Error", error);
             });
         &lt;/script>
     &lt;/body>
@@ -482,10 +476,7 @@ this.addEventListener('activate', function(event) {
 </section>
 
 <section >
-    <h3>Caching API</h3>
-    <p>Service Worker comes with a caching API.</p>
-
-    <p>In worker.js</p>
+    <p>Service Worker comes with a caching API. In worker.js</p>
     <pre><code class="javascript" data-noescape="">this.addEventListener('install', function(event) {
     event.waitUntil(
         ^^caches.create^^('myapp-static-v1').then(function(cache) {
@@ -498,7 +489,6 @@ this.addEventListener('activate', function(event) {
         })
     );
 });
-
 this.addEventListener('fetch', function(event) {
     event.respondWith(
         ^^caches.match^^(event.request).then(function(response) {
@@ -532,8 +522,8 @@ this.addEventListener('fetch', function(event) {
 
 <section  >
     <p>In the page</p>
-    <pre><code class="javascript" data-noescape="">navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
-    serviceWorkerRegistration.^^push.register^^()
+    <pre><code class="javascript" data-noescape="">navigator.serviceWorker.ready.then(function(registration) {
+    registration.^^push.register^^()
         .then(function(pushSubscription) {
         sendSubscription(^^pushSubscription^^);
     })
@@ -573,8 +563,8 @@ this.addEventListener('fetch', function(event) {
         <pre><code class="javascript" data-noescape="">^^sendEmail^^(data).catch(function() {
     return ^^saveToOutbox(data)^^.then(function() {
         return navigator.serviceWorker.ready;
-    }).then(function(serviceWorkerRegistration) {
-        return serviceWorkerRegistration.^^sync.register^^(^^'empty-outbox'^^);
+    }).then(function(registration) {
+        return registration.^^sync.register^^(^^'empty-outbox'^^);
     });
 }); </code> </pre>
 </section>
@@ -601,8 +591,8 @@ this.addEventListener('fetch', function(event) {
     <h3>Periodic Sync </h3>
 
     <p>In the page</p>
-        <pre><code class="javascript" data-noescape="">navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
-    serviceWorkerRegistration.^^sync.register^^('send-emails', {
+        <pre><code class="javascript" data-noescape="">navigator.serviceWorker.ready.then(function(registration) {
+    registration.^^sync.register^^('send-emails', {
         ^^minInterval^^: 60 * 60 * 1000
     });
 }); </code> </pre>
